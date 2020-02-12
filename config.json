@@ -1,0 +1,50 @@
+{
+  "Test_Title": "test1",
+  "Run_Control": true,
+  "CPU_Time": 0.5,
+  "Memory_Time": 0.5,
+  "Battery_Time": 5,
+  "Polling_Time": 5,
+  "Run_Duration_Time":30,
+  "Command": {
+    "CPU_Command_Process":"adb -s %s shell cat /proc/%s/stat",
+    "CPU_Command_Total":"adb -s %s shell cat /proc/stat",
+    "Memory_Command":"adb -s %s shell dumpsys meminfo %s",
+    "Battery_Command":"adb -s %s shell dumpsys battery | findstr level",
+    "check_android_version":"adb -s %s shell getprop ro.build.version.release",
+    "reset_battery":"adb -s %s shell dumpsys batterystats --reset",
+    "start_to_collect":"adb -s %s shell dumpsys batterystats --enable full-wake-history",
+    "end_collect":"adb -s %s shell dumpsys batterystats --disable full-wake-history",
+    "exceed_android_7":"adb -s %s bugreport %s\\bugreport.zip",
+    "under_android_7":"adb -s %s bugreport > %s\\bugreport.txt",
+    "Traffic_Command":"",
+    "Tap_Command":"adb -s %s shell input %s %s %s %s %s %s",
+    "status":"adb devices | findstr %s",
+    "kill_server":"adb kill-server",
+    "restart_server":"adb start-server",
+    "connect":"adb connect %s",
+    "Pid_Command":"adb -s %s shell ps | findstr %s",
+    "Current_activity":"adb -s %s shell dumpsys activity activities | findstr Run | findstr %s "
+  },
+  "Path": {
+    "data_path": "D:\\workspace\\python\\AppPerf\\data\\%s\\",
+    "result_path": {
+        "cpu": "%s\\cpu.csv",
+        "memory": "%s\\memory.csv",
+        "battery": "%s\\battery.csv",
+        "traffic": "%s\\traffic.csv"
+      }
+  },
+  "Devices": {
+    "device1": {
+      "name": "Redmi",
+      "ip": "192.168.199.235:5555",
+      "Application_Under_test": "com.qiyi.video"
+    },
+    "device2": {
+      "name": "Mi 6",
+      "ip": "192.168.199.107:5555",
+      "Application_Under_test": "com.tencent.qqlive"
+    }
+  }
+}
